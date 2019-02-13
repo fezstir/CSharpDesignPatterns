@@ -29,8 +29,8 @@ namespace CSharpDesignPatterns
 
         public AbstractWheel(int size, bool isWide)
         {
-            Size = size;
-            IsWide = isWide;
+            _size = size;
+            _isWide = isWide;
         }
     }
 }
