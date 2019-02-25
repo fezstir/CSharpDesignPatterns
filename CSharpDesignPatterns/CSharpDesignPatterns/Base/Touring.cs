@@ -8,6 +8,8 @@ namespace CSharpDesignPatterns
 {
     class Touring : AbstractRoadBike
     {
+        public override decimal Price { get; } = 570.00m;
+
         public Touring(IWheel wheel)
         : this(BikeColor.Blue, wheel) { }
 

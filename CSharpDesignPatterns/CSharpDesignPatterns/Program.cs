@@ -5,16 +5,67 @@ using System.Text;
 using System.Threading.Tasks;
 using AbstractFactory;
 using Builder;
+using Singleton;
+using Adapter;
+using Decorator;
 
 namespace CSharpDesignPatterns
+
 {
     class Program
     {
+
         static void Main(string[] args)
         {
             //AbstractFactoryDemo();
-            BuilderPatternDemo();
+            //BuilderPatternDemo();
+            //SingletonPatternDemo();
+            //AdapterPatternDemo();
+            DecoratorPatternDemo();
         }
+
+        private static void DecoratorPatternDemo()
+        {
+            //standard touring bike
+            IBicycle myTourbike = new Touring(new NarrowWheel(24));
+            Console.WriteLine(myTourbike);
+
+            //touring bikewith custome grips
+            myTourbike = new CustomGripOption(myTourbike);
+            Console.WriteLine(myTourbike);
+
+            //touring bike with leather seat
+            myTourbike = new LeatherSeatOption(myTourbike);
+            Console.WriteLine(myTourbike);
+        }
+
+        private static void AdapterPatternDemo()
+        {
+            IList<IWheel> wheels = new List<IWheel>();
+            wheels.Add(new NarrowWheel(24));
+            wheels.Add(new WideWheel(20));
+            wheels.Add(new NarrowWheel(26));
+            wheels.Add(new UltraWheelAdapter(new UltraWheel(28)));
+
+            foreach (IWheel wheel in wheels)
+            {
+                Console.WriteLine(wheel);
+            }
+
+            // The Results would be the following:
+
+            //NarrowWheel with a wheel size of 24 inches
+            //NarrowWheel with a wheel size of 20 inches
+            //WideWheel with a wheel size of 24 inches
+        }
+        private static void SingletonPatternDemo()
+        {
+            SerialNumberGenerator generator = SerialNumberGenerator.Instance;
+            Console.WriteLine("nextserial" + generator.NextSerial);
+            Console.WriteLine("next serial" + SerialNumberGenerator.Instance.NextSerial);
+            Console.WriteLine("next serial" + generator.NextSerial);
+        }
+
         private static void BuilderPatternDemo()
         {
             AbstractMountainBike mountainBike =
